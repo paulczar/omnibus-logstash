@@ -31,6 +31,18 @@ where the `build project` command is invoked. So running this command on say a
 MacBook Pro will generate a Mac OS X specific package. After the build
 completes packages will be available in `pkg/`.
 
+builds and installs into /opt/logstash
+
+* logstash
+* kibana
+* redis
+* elasticsearch
+* jre
+* ruby
+* jruby
+* a bunch of dependencies
+
+
 ### Clean
 
 You can clean up all temporary files generated during the build process with
@@ -106,3 +118,9 @@ The complete list of valid platform names can be viewed with the
 `vagrant status` command.
 
 
+## ToDo
+
+* build control/init scripts
+* default configs for all parts so they can run
+* /opt/logstash/etc to hold both above
+* central log dir for all packages

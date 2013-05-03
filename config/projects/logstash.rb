@@ -21,7 +21,7 @@ dependency "kibana"
 dependency "elasticsearch"
 dependency "elasticsearch-servicewrapper"
 dependency "redis"
-dependency "rabbitmq"
+#dependency "rabbitmq"
 
 exclude "\.git*"
 exclude "bundler\/git"
