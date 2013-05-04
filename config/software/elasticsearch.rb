@@ -28,5 +28,8 @@ source :url => "https://download.elasticsearch.org/elasticsearch/elasticsearch/e
 relative_path "elasticsearch-0.90.0"
 
 build do
-  command "#{install_dir}/embedded/bin/rsync -a . #{install_dir}/embedded/elasticsearch/"
+  command "#{install_dir}/embedded/bin/rsync -a . #{install_dir}/elasticsearch/"
+# fuck solaris ...  i don't need ya!
+  command "rm -f #{install_dir}/elasticsearch/lib/sigar/libsigar-x86-solaris.so"
+  command "rm -f #{install_dir}/elasticsearch/lib/sigar/libsigar-amd64-solaris.so"
 end

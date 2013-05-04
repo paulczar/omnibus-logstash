@@ -1,5 +1,5 @@
 
-name "logstash"
+name "kibana"
 maintainer "Paul Czarkowski"
 homepage "http://tech.paulcz.net"
 

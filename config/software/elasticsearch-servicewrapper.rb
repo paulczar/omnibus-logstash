@@ -27,5 +27,6 @@ relative_path "elasticsearch-servicewrapper"
 
 
 build do
+  command "mkdir -p #{install_dir}/embedded/elasticsearch/bin/service"
   command "#{install_dir}/embedded/bin/rsync -a . #{install_dir}/embedded/elasticsearch/bin/"
 end
