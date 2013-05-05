@@ -29,8 +29,8 @@ Vagrant.configure("2") do |config|
 
   config.vm.define 'ubuntu-12.04' do |c|
     c.berkshelf.berksfile_path = "./Berksfile"
-    #c.vm.box = "canonical-ubuntu-12.04"
-    c.vm.box = "precise64"
+    c.vm.box = "canonical-ubuntu-12.04"
+    #c.vm.box = "precise64"
     c.vm.box_url = "http://cloud-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-amd64-vagrant-disk1.box"
   end
 

@@ -76,6 +76,10 @@ $ bundle install --binstubs
 
 ### Build
 
+_ubuntu 12.x + bugfix_
+
+```sudo apt-get -y install libncurses5-dev```
+
 You create a platform-specific package using the `build project` command:
 
 ```shell
