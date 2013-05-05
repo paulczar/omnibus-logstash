@@ -5,9 +5,9 @@
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-#
-# http://www.apache.org/licenses/LICENSE-2.0
-#
+# 
+#     http://www.apache.org/licenses/LICENSE-2.0
+# 
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,20 +15,23 @@
 # limitations under the License.
 #
 
-name "kibana"
-version "v0.2.0"
+name "nodejs"
+version "0.10.5"
 
-dependency "ruby"
-dependency "rubygems"
-dependency "bundler"
-dependency "rsync"
+dependency "curl"
 
-source :git => "https://github.com/rashidkpc/Kibana.git"
+source :url => 'http://nodejs.org/dist/v0.10.5/node-v0.10.5.tar.gz',
+       :md5 => 'f6b1c363f75185d57c8486cd63c42e14'
 
-relative_path "kibana"
+relative_path "node-v0.10.5"
 
+env = {
+  "CFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include",
+  "LD_RUN_PATH" => "#{install_dir}/embedded/lib"
+}
 
 build do
-  bundle "install"
-  command "#{install_dir}/embedded/bin/rsync -a . #{install_dir}/embedded/kibana/"
+  command "./configure --prefix=#{install_dir}/embedded", :env => env
+  command "make -j #{max_build_jobs}", :env => env
+  command "make install", :env => env
 end

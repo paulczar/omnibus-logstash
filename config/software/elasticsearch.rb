@@ -28,8 +28,13 @@ source :url => "https://download.elasticsearch.org/elasticsearch/elasticsearch/e
 relative_path "elasticsearch-0.90.0"
 
 build do
-  command "#{install_dir}/embedded/bin/rsync -a . #{install_dir}/elasticsearch/"
-# fuck solaris ...  i don't need ya!
-  command "rm -f #{install_dir}/elasticsearch/lib/sigar/libsigar-x86-solaris.so"
-  command "rm -f #{install_dir}/elasticsearch/lib/sigar/libsigar-amd64-solaris.so"
+  command "#{install_dir}/embedded/bin/rsync -a . #{install_dir}/embedded/elasticsearch/"
+  # delete solaris libraries that break omnibus library checking.
+  # if you use solaris comment out next two lines, and may God have mercy on your soul.
+  command "rm -f #{install_dir}/embedded/elasticsearch/lib/sigar/libsigar-x86-solaris.so"
+  command "rm -f #{install_dir}/embedded/elasticsearch/lib/sigar/libsigar-amd64-solaris.so"
+  command "#{install_dir}/embedded/elasticsearch/bin/plugin -install elasticsearch/elasticsearch-river-rabbitmq/1.4.0"
+  command "#{install_dir}/embedded/elasticsearch/bin/plugin -install lukas-vlcek/bigdesk"
+  command "#{install_dir}/embedded/elasticsearch/bin/plugin -install karmi/elasticsearch-paramedic"
+  command "#{install_dir}/embedded/elasticsearch/bin/plugin -install mobz/elasticsearch-head"
 end

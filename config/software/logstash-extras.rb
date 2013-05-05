@@ -6,7 +6,7 @@
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-# http://www.apache.org/licenses/LICENSE-2.0
+#     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,20 +15,12 @@
 # limitations under the License.
 #
 
-name "kibana"
-version "v0.2.0"
+name "logstash-extras"
 
-dependency "ruby"
-dependency "rubygems"
-dependency "bundler"
 dependency "rsync"
 
-source :git => "https://github.com/rashidkpc/Kibana.git"
-
-relative_path "kibana"
-
+source :path => File.expand_path("files", Omnibus.project_root)
 
 build do
-  bundle "install"
-  command "#{install_dir}/embedded/bin/rsync -a . #{install_dir}/embedded/kibana/"
+  command "#{install_dir}/embedded/bin/rsync -a . #{install_dir}/"
 end

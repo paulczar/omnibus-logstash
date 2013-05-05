@@ -15,18 +15,16 @@
 # limitations under the License.
 #
 
-name "elasticsearch-servicewrapper"
+name "kibana3"
 version "HEAD"
-
 dependency "rsync"
-dependency "elasticsearch"
+dependency "nodejs"
 
-source :git => "https://github.com/elasticsearch/elasticsearch-servicewrapper.git"
+source :git => "https://github.com/elasticsearch/kibana3"
 
-relative_path "elasticsearch-servicewrapper"
+relative_path "kibana3"
 
 
 build do
-  command "mkdir -p #{install_dir}/embedded/elasticsearch/bin/service"
-  command "#{install_dir}/embedded/bin/rsync -a . #{install_dir}/embedded/elasticsearch/bin/"
+  command "#{install_dir}/embedded/bin/rsync -a . #{install_dir}/embedded/kibana3/"
 end

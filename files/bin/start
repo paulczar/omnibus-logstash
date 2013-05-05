@@ -1,0 +1,14 @@
+#!/bin/sh
+
+
+for f in /opt/logstash/service/*.rb
+do 
+  echo "Starting $f ..."
+  $f start
+done
+
+echo "wait a few seconds for services to load..."
+sleep 10
+
+/opt/logstash/bin/status
+

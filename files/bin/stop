@@ -1,0 +1,12 @@
+#!/bin/sh
+
+for f in /opt/logstash/service/*.rb
+do 
+  echo "Stopping $f ..."
+  $f stop
+done
+
+echo "wait a few seconds for services to stop..."
+sleep 5
+/opt/logstash/bin/status
+

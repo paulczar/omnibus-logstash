@@ -18,22 +18,20 @@
 name "logstash"
 version "1.1.10"
 
-#dependency "ruby"
-#dependency "rubygems"
-#dependency "bundler"
-#dependency "rsync"
-dependency "jruby"
+dependency "jre"
 
 source :url => "https://logstash.objects.dreamhost.com/release/logstash-#{version}-flatjar.jar",
        :md5 => "0177b73539a22b42f95611393cb566b1"
 
 relative_path "logstash"
 
-
 build do
   command "mkdir -p #{install_dir}/log"
-  command "mkdir -p #{install_dir}/conf.d"
+  command "mkdir -p #{install_dir}/etc/logstash.d"
   command "mkdir -p #{install_dir}/data"
   command "mkdir -p #{install_dir}/patterns"
+  command "mkdir -p #{install_dir}/tmp"
+  command "mkdir -p #{install_dir}/service"
+
   command "cp logstash-#{version}-flatjar.jar #{install_dir}/bin/logstash.jar"
 end

@@ -3,9 +3,65 @@
 This project creates full-stack platform-specific packages for
 `logstash`!
 
-_I had to patch libiconv.rb to build on my system for ruby.  I did it dirty, then found this, so used it instead.  https://github.com/opscode/omnibus-software/pull/14/files.   @mattray please take his pull request._
+It installs the following apps and the support libraries and start/stop scripts for
 
-Still a little broken ...  work in progress!
+* logstash
+* elasticsearch
+* redis
+* kibana
+* kibana3
+
+Start  - `/opt/logstash/bin/start`
+Status - `/opt/logstash/bin/status`
+Stop   - `/opt/logstash/bin/stop`
+
+Kibana        - http://localhost:5601
+Kibana3       - http://localhost:8000/index.html
+Elasticsearch - http://localhost:9200/_status?pretty=true
+BigDesk       - http://localhost:9200/_plugin/bigdesk/
+Head          - http://localhost:9200/_plugin/head/
+
+Logstash by default will ( `/opt/logstash/etc/logstash.d/` )
+* read local syslog files,
+* listen to TCP:514 for syslog messages, 
+* subscribe to local redis server,
+* attempt to parse syslog messages,
+* output to elasticsearch  
+
+# Using the logstash omnibus packages
+
+## RHEL
+
+```rpm -Uhv logstash-omnibus.rpm```
+
+## Ubuntu
+
+```deb -i logstash-omnibus.deb```
+
+## Start Processes
+
+```sudo /opt/logstash/bin/start``` 
+
+## Send some fake logs
+
+via netcat
+
+```echo `date +"%b %e %T"` `hostname` foo[666]: some random text | nc localhost 514```
+
+or if you don't have netcat installed
+
+```echo `date +"%b %e %T"` `hostname` foo[666]: some random text >> /var/log/syslog```
+
+## Search your logs
+
+open your web browser and browse to 
+
+Kibana        - http://localhost:5601
+or
+Kibana3       - http://localhost:8000/index.html
+
+
+# Building the logstash omnibus packages
 
 ## Installation
 
@@ -124,3 +180,8 @@ The complete list of valid platform names can be viewed with the
 * default configs for all parts so they can run
 * /opt/logstash/etc to hold both above
 * central log dir for all packages
+
+## Misc
+
+* I had to patch libiconv.rb to build on my system for ruby.  I did it dirty, then found this, so used it instead.  https://github.com/opscode/omnibus-software/pull/14/files.   Opscode please take his pull request.
+* erlang fails which means I couldn't build rabbit in.
