@@ -71,7 +71,9 @@ or if you don't have netcat installed
 open your web browser and browse to 
 
 Kibana        - http://localhost:5601
+
 or
+
 Kibana3       - http://localhost:8000/index.html
 
 
