@@ -27,7 +27,10 @@ __Access__
 * ES Head       - http://localhost:9200/_plugin/head/
 
 config files all found in `/opt/logstash/etc`
+
 individual init scripts found in `/opt/logstash/service`
+
+Logstash will by default `/opt/logstash/etc/logstash.d/` do 
 
 * read local syslog files,
 * listen to TCP:514 for syslog messages, 
