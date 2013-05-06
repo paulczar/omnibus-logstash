@@ -10,11 +10,11 @@ require 'fileutils'
 scriptdir = "/opt/logstash/embedded/kibana"
 
 # populate environment variables
-pid_dir = "/opt/logstash/tmp"
-app_name = "kibana"
+pid_dir    = "/opt/logstash/tmp"
+app_name   = "kibana2"
 log_output = true
-log_dir = "/opt/logstash/log"
-cmd = "/opt/logstash/embedded/bin/ruby /opt/logstash/embedded/kibana/kibana.rb"
+log_dir    = "/opt/logstash/log"
+cmd        = "/opt/logstash/embedded/bin/ruby /opt/logstash/embedded/kibana/kibana.rb"
 
 options = {
           :dir_mode => :normal,

@@ -19,7 +19,7 @@ dependency "elasticsearch"
 dependency "redis"
 dependency "logstash-extras"
 
-#dependency "rabbitmq"
+dependency "rabbitmq"
 # rabbit relies on broken erlang package.
 
 # version manifest file

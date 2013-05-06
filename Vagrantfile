@@ -19,12 +19,14 @@ Vagrant.configure("2") do |config|
     c.berkshelf.berksfile_path = "./Berksfile"
     c.vm.box = "opscode-ubuntu-10.04"
     c.vm.box_url = "http://opscode-vm.s3.amazonaws.com/vagrant/opscode_ubuntu-10.04_chef-11.2.0.box"
+    c.vm.network :private_network, ip: "192.168.33.11"
   end
 
   config.vm.define 'ubuntu-11.04' do |c|
     c.berkshelf.berksfile_path = "./Berksfile"
     c.vm.box = "opscode-ubuntu-11.04"
     c.vm.box_url = "http://opscode-vm.s3.amazonaws.com/vagrant/boxes/opscode-ubuntu-11.04.box"
+    c.vm.network :private_network, ip: "192.168.33.12"
   end
 
   config.vm.define 'ubuntu-12.04' do |c|
@@ -32,18 +34,21 @@ Vagrant.configure("2") do |config|
     c.vm.box = "canonical-ubuntu-12.04"
     #c.vm.box = "precise64"
     c.vm.box_url = "http://cloud-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-amd64-vagrant-disk1.box"
+    c.vm.network :private_network, ip: "192.168.33.13"
   end
 
   config.vm.define 'centos-5' do |c|
     c.berkshelf.berksfile_path = "./Berksfile"
     c.vm.box = "opscode-centos-5.8"
     c.vm.box_url = "http://opscode-vm.s3.amazonaws.com/vagrant/opscode_centos-5.8_chef-11.2.0.box"
+    c.vm.network :private_network, ip: "192.168.33.14"
   end
 
   config.vm.define 'centos-6' do |c|
     c.berkshelf.berksfile_path = "./Berksfile"
     c.vm.box = "opscode-centos-6.3"
     c.vm.box_url = "http://opscode-vm.s3.amazonaws.com/vagrant/opscode_centos-6.3_chef-11.2.0.box"
+    c.vm.network :private_network, ip: "192.168.33.15"
   end
 
   config.vm.provider :virtualbox do |vb|
@@ -87,10 +92,12 @@ Vagrant.configure("2") do |config|
     ]
   end
 
+#### COMMENT OUT THIS BLOCK if you want to test an Package already built...#####
   config.vm.provision :shell, :inline => <<-OMNIBUS_BUILD
     export PATH=/usr/local/bin:$PATH
     cd #{guest_project_path}
     su vagrant -c "bundle install --binstubs"
     su vagrant -c "bin/omnibus build project #{project_name}"
   OMNIBUS_BUILD
+#### COMMENT OUT THIS BLOCK if you want to test an Package already built...#####
 end

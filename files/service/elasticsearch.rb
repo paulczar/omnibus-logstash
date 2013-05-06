@@ -16,11 +16,11 @@ log_output = true
 log_dir = "/opt/logstash/log"
 
 # variables for launching
-JAVAHOME   = "/opt/logstash/embedded/jre" 
+JAVA_HOME   = "/opt/logstash/embedded/jre" 
 ES         = "/opt/logstash/embedded/elasticsearch/bin/elasticsearch"
 ARGS       = "-f es.config=/opt/logstash/etc/elasticsearch.yml"
 
-ENV['JAVAHOME'] = "#{JAVAHOME}"
+ENV['JAVA_HOME'] = "#{JAVA_HOME}"
 
 cmd = "#{ES} #{ARGS}"
 

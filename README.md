@@ -10,6 +10,7 @@ It installs the following apps and the support libraries and start/stop scripts 
 * redis
 * kibana
 * kibana3
+* rabbitmq ( not working yet, need to work through erlang issues )
 
 Start  - `/opt/logstash/bin/start`
 Status - `/opt/logstash/bin/status`
@@ -30,13 +31,17 @@ Logstash by default will ( `/opt/logstash/etc/logstash.d/` )
 
 # Using the logstash omnibus packages
 
-## RHEL
+I have prebuilt some Packages which can be found here -
 
-```rpm -Uhv logstash-omnibus.rpm```
+## RHEL 6.x  64bit
 
-## Ubuntu
+```https://s3-us-west-2.amazonaws.com/paulcz-packages/logstash-omnibus-1.1.10.el6.x86_64.rpm
+   rpm -Uhv logstash-omnibus.rpm```
 
-```deb -i logstash-omnibus.deb```
+## Ubuntu 12.04 64bit
+
+```wget https://s3-us-west-2.amazonaws.com/paulcz-packages/logstash-omnibus-1.1.10_amd64.deb
+deb -i logstash-omnibus.deb```
 
 ## Start Processes
 
