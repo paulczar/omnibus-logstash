@@ -12,15 +12,19 @@ It installs the following apps and the support libraries and start/stop scripts 
 * kibana3
 * rabbitmq ( not working yet, need to work through erlang issues )
 
-Start  - `/opt/logstash/bin/start`
-Status - `/opt/logstash/bin/status`
-Stop   - `/opt/logstash/bin/stop`
+Control scripts:
 
-Kibana        - http://localhost:5601
-Kibana3       - http://localhost:8000/index.html
-Elasticsearch - http://localhost:9200/_status?pretty=true
-BigDesk       - http://localhost:9200/_plugin/bigdesk/
-Head          - http://localhost:9200/_plugin/head/
+* Start  - `/opt/logstash/bin/start`
+* Status - `/opt/logstash/bin/status`
+* Stop   - `/opt/logstash/bin/stop`
+
+Access:
+
+* Kibana        - http://localhost:5601
+* Kibana3       - http://localhost:8000/index.html
+* Elasticsearch - http://localhost:9200/_status?pretty=true
+* ES BigDesk    - http://localhost:9200/_plugin/bigdesk/
+* ES Head       - http://localhost:9200/_plugin/head/
 
 config files all found in `/opt/logstash/etc`
 individual init scripts found in `/opt/logstash/service`
