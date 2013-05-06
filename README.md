@@ -12,13 +12,13 @@ It installs the following apps and the support libraries and start/stop scripts 
 * kibana3
 * rabbitmq ( not working yet, need to work through erlang issues )
 
-Control scripts:
+__Control scripts__
 
 * Start  - `/opt/logstash/bin/start`
 * Status - `/opt/logstash/bin/status`
 * Stop   - `/opt/logstash/bin/stop`
 
-Access:
+__Access__
 
 * Kibana        - http://localhost:5601
 * Kibana3       - http://localhost:8000/index.html
