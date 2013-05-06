@@ -33,17 +33,17 @@ individual init scripts found in `/opt/logstash/service`
 
 # Using the logstash omnibus packages
 
-I have prebuilt some Packages which can be found here -
+I have prebuilt some Packages which can be used as below.
 
 ## RHEL 6.x  64bit
 
-    https://s3-us-west-2.amazonaws.com/paulcz-packages/logstash-omnibus-1.1.10.el6.x86_64.rpm
-    rpm -Uhv logstash-omnibus.rpm
+    wget https://s3-us-west-2.amazonaws.com/paulcz-packages/logstash-omnibus-1.1.10.el6.x86_64.rpm
+    rpm -Uhv logstash-omnibus-1.1.10.el6.x86_64.rpm
 
 ## Ubuntu 12.04 64bit
 
     wget https://s3-us-west-2.amazonaws.com/paulcz-packages/logstash-omnibus-1.1.10_amd64.deb
-    deb -i logstash-omnibus.deb
+    dpkg -i logstash-omnibus-1.1.10_amd64.deb
 
 ## Start Processes
 
