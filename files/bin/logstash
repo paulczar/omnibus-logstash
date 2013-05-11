@@ -1,0 +1,15 @@
+#!/bin/sh
+
+basedir=$(cd `dirname $0`/..; pwd)
+if [ -d "$basedir/.git" ] ; then
+  RUBY=${RUBY=jruby}
+  RUBYVER=${RUBYVER=1.9}
+  export GEM_HOME="$basedir/vendor/bundle/${RUBY}/${RUBYVER}"
+  export GEM_PATH=
+fi
+
+export RUBYLIB="$basedir/lib"
+export JAVA_HOME="/opt/logstash/embedded/jre"
+
+
+/opt/logstash/embedded/jruby/bin/jruby "$basedir/lib/logstash/runner.rb" "$@"
