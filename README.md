@@ -173,13 +173,22 @@ $ vagrant up PLATFORM
 The complete list of valid platform names can be viewed with the
 `vagrant status` command.
 
+If vagrant fails to build ...  provision a few times
+
+```vagrant provision PLATFORM```
+
+if its still failing log in and clean up and try again
+
+```vagrant ssh PLATFORM
+sudo bash
+cd /home/vagrant/omnibus-logstash
+bin/omnibus clean logstash
+rm -rf /opt/logstash
+bin/omnibus build project logstash
+```
 
 ## ToDo
 
-* build control/init scripts
-* default configs for all parts so they can run
-* /opt/logstash/etc to hold both above
-* central log dir for all packages
 
 ## Misc
 

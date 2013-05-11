@@ -12,15 +12,14 @@ build_iteration 1
 dependency "preparation"
 
 # logstash dependencies/components
+
 dependency "logstash"
 dependency "kibana"
 dependency "kibana3"
 dependency "elasticsearch"
 dependency "redis"
 dependency "logstash-extras"
-
-#dependency "rabbitmq"
-# rabbit relies on broken erlang package.
+dependency "rabbitmq"
 
 # version manifest file
 dependency "version-manifest"
