@@ -6,3 +6,6 @@ pkg/*
 bin/*
 files/**/cache/
 vendor/cookbooks
+ldd.out
+*.rpm
+*.deb

@@ -10,18 +10,28 @@ It installs the following apps and the support libraries and start/stop scripts 
 * redis
 * kibana
 * kibana3
+* rabbitmq ( not working yet, need to work through erlang issues )
 
-Start  - `/opt/logstash/bin/start`
-Status - `/opt/logstash/bin/status`
-Stop   - `/opt/logstash/bin/stop`
+__Control scripts__
 
-Kibana        - http://localhost:5601
-Kibana3       - http://localhost:8000/index.html
-Elasticsearch - http://localhost:9200/_status?pretty=true
-BigDesk       - http://localhost:9200/_plugin/bigdesk/
-Head          - http://localhost:9200/_plugin/head/
+* Start  - `/opt/logstash/bin/start`
+* Status - `/opt/logstash/bin/status`
+* Stop   - `/opt/logstash/bin/stop`
 
-Logstash by default will ( `/opt/logstash/etc/logstash.d/` )
+__Access__
+
+* Kibana        - http://localhost:5601
+* Kibana3       - http://localhost:8000/index.html
+* Elasticsearch - http://localhost:9200/_status?pretty=true
+* ES BigDesk    - http://localhost:9200/_plugin/bigdesk/
+* ES Head       - http://localhost:9200/_plugin/head/
+
+config files all found in `/opt/logstash/etc`
+
+individual init scripts found in `/opt/logstash/service`
+
+Logstash will by default `/opt/logstash/etc/logstash.d/` do 
+
 * read local syslog files,
 * listen to TCP:514 for syslog messages, 
 * subscribe to local redis server,
@@ -30,34 +40,40 @@ Logstash by default will ( `/opt/logstash/etc/logstash.d/` )
 
 # Using the logstash omnibus packages
 
-## RHEL
+I have prebuilt some Packages which can be used as below.
 
-```rpm -Uhv logstash-omnibus.rpm```
+## RHEL 6.x  64bit
 
-## Ubuntu
+    wget https://s3-us-west-2.amazonaws.com/paulcz-packages/logstash-omnibus-1.1.10.el6.x86_64.rpm
+    rpm -Uhv logstash-omnibus-1.1.10.el6.x86_64.rpm
 
-```deb -i logstash-omnibus.deb```
+## Ubuntu 12.04 64bit
+
+    wget https://s3-us-west-2.amazonaws.com/paulcz-packages/logstash-omnibus-1.1.10_amd64.deb
+    dpkg -i logstash-omnibus-1.1.10_amd64.deb
 
 ## Start Processes
 
-```sudo /opt/logstash/bin/start``` 
+    sudo /opt/logstash/bin/start
 
 ## Send some fake logs
 
 via netcat
 
-```echo `date +"%b %e %T"` `hostname` foo[666]: some random text | nc localhost 514```
+    echo `date +"%b %e %T"` `hostname` foo[666]: some random text | nc localhost 514
 
 or if you don't have netcat installed
 
-```echo `date +"%b %e %T"` `hostname` foo[666]: some random text >> /var/log/syslog```
+    echo `date +"%b %e %T"` `hostname` foo[666]: some random text >> /var/log/syslog
 
 ## Search your logs
 
 open your web browser and browse to 
 
 Kibana        - http://localhost:5601
+
 or
+
 Kibana3       - http://localhost:8000/index.html
 
 
@@ -68,19 +84,19 @@ Kibana3       - http://localhost:8000/index.html
 We'll assume you have Ruby 1.9+ and Bundler installed. First ensure all
 required gems are installed and ready to use:
 
-```shell
-$ bundle install --binstubs
-```
+    bundle install --binstubs
 
 ## Usage
 
 ### Build
 
+_ubuntu 12.x + bugfix_
+
+    sudo apt-get -y install libncurses5-dev
+
 You create a platform-specific package using the `build project` command:
 
-```shell
-$ bin/omnibus build project logstash
-```
+    bin/omnibus build project logstash
 
 The platform/architecture type of the package created will match the platform
 where the `build project` command is invoked. So running this command on say a
@@ -104,26 +120,21 @@ builds and installs into /opt/logstash
 You can clean up all temporary files generated during the build process with
 the `clean` command:
 
-```shell
-$ bin/omnibus clean
-```
+    bin/omnibus clean
+
 
 Adding the `--purge` purge option removes __ALL__ files generated during the
 build including the project install directory (`/opt/logstash`) and
 the package cache directory (`/var/cache/omnibus/pkg`):
 
-```shell
-$ bin/omnibus clean --purge
-```
+    bin/omnibus clean --purge
 
 ### Help
 
 Full help for the Omnibus command line interface can be accessed with the
 `help` command:
 
-```shell
-$ bin/omnibus help
-```
+    bin/omnibus help
 
 ## Vagrant-based Virtualized Build Lab
 

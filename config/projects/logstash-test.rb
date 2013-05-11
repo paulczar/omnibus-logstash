@@ -1,5 +1,5 @@
 
-name "logstash"
+name "logstash-test"
 maintainer "Paul Czarkowski"
 homepage "http://tech.paulcz.net"
 
@@ -12,14 +12,16 @@ build_iteration 1
 dependency "preparation"
 
 # logstash dependencies/components
+dependency "logstash-src"
 
-dependency "logstash"
-dependency "kibana"
-dependency "kibana3"
-dependency "elasticsearch"
-dependency "redis"
+#dependency "logstash"
+#dependency "kibana"
+#dependency "kibana3"
+#dependency "elasticsearch"
+#dependency "redis"
 dependency "logstash-extras"
-dependency "rabbitmq"
+
+#dependency "rabbitmq"
 # rabbit relies on broken erlang package.
 
 # version manifest file
