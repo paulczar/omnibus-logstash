@@ -9,9 +9,12 @@ end
 
 host_project_path = File.expand_path("..", __FILE__)
 guest_project_path = "/home/vagrant/#{File.basename(host_project_path)}"
-project_name = "logstash"
+project_name = ENV['project_name'] || "logstash-src"
 
 Vagrant.configure("2") do |config|
+
+  # Enable Vagrant Cachier for faster build times
+  config.cache.auto_detect = true
 
   config.vm.hostname = "#{project_name}-omnibus-build-lab"
 

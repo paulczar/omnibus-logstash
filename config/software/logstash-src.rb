@@ -16,14 +16,23 @@
 #
 
 name "logstash-src"
-version "v1.1.12"
+version "v1.1.13"
 
 dependency "jre"
-dependency "jruby"
+#dependency "jruby"
 
 source :git => "https://github.com/logstash/logstash.git"
 
 relative_path "logstash"
+
+cwd = "/var/cache/omnibus/src/logstash"
+
+env = {
+  "JAVA_HOME" => "#{install_dir}/embedded/jre",
+  "GEM_HOME" => "#{install_dir}/vendor/bundle/jruby/1.9/",
+  "PATH" => "/opt/logstash/embedded/jre/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:"
+}
+
 
 build do
   command "mkdir -p #{install_dir}/log"
@@ -34,9 +43,21 @@ build do
   command "mkdir -p #{install_dir}/service"
   command "mkdir -p #{install_dir}/lib"
   command "mkdir -p #{install_dir}/vendor"
-#  command "cp logstash-flatjar.jar #{install_dir}/bin/logstash.jar"
+  command "mkdir -p #{install_dir}/locales"
+#  bundle "install"
+  #command "#{install_dir}/embedded/jruby/bin/jruby #{install_dir}/embedded/jruby/bin/jgem install bundler", :env => env
+  #command "#{install_dir}/embedded/jruby/bin/jruby #{install_dir}/embedded/jruby/bin/bundle install", :env => env
+  #command "make vendor-elasticsearch", :env => env
+  #command "#{install_dir}/embedded/jruby/bin/jruby ./gembag.rb logstash.gemspec", :env => env
+  command "make build-jruby", :env => env
+  #command "su - root -c /tmp/runme.sh", :env => env
+  command "su - root -c \"cd /opt/logstash; JAVA_HOME=#{install_dir}/embedded/jre GEM_HOME=#{install_dir}/vendor/bundle/jruby/1.9/ #{install_dir}/embedded/jre/bin/java -jar #{cwd}/vendor/jar/jruby-complete-1.7.3.jar #{cwd}/gembag.rb #{cwd}/logstash.gemspec\"", :env => env
+  #command "make vendor-gems 2>> /tmp/errors.txt >> /tmp/output.txt", :env => env
   command "#{install_dir}/embedded/bin/rsync -a bin/. #{install_dir}/bin/"
+  command "#{install_dir}/embedded/bin/rsync -a vendor/. #{install_dir}/vendor/"
   command "#{install_dir}/embedded/bin/rsync -a etc/. #{install_dir}/etc/"
   command "#{install_dir}/embedded/bin/rsync -a patterns/. #{install_dir}/patterns/"
-  command "#{install_dir}/embedded/bin/rsync -a vendor/. #{install_dir}/vendor/"
+  #command "#{install_dir}/embedded/bin/rsync -a vendor/. #{install_dir}/vendor/"
+  command "#{install_dir}/embedded/bin/rsync -a lib/. #{install_dir}/lib/"
+  command "#{install_dir}/embedded/bin/rsync -a locales/. #{install_dir}/locales/"
 end

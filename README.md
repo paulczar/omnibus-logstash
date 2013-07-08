@@ -8,9 +8,7 @@ It installs the following apps and the support libraries and start/stop scripts 
 * logstash
 * elasticsearch
 * redis
-* kibana
 * kibana3
-* rabbitmq ( not working yet, need to work through erlang issues )
 
 __Control scripts__
 
@@ -20,8 +18,7 @@ __Control scripts__
 
 __Access__
 
-* Kibana        - http://localhost:5601
-* Kibana3       - http://localhost:8000/index.html
+* Kibana3       - http://localhost
 * Elasticsearch - http://localhost:9200/_status?pretty=true
 * ES BigDesk    - http://localhost:9200/_plugin/bigdesk/
 * ES Head       - http://localhost:9200/_plugin/head/
@@ -30,7 +27,7 @@ config files all found in `/opt/logstash/etc`
 
 individual init scripts found in `/opt/logstash/service`
 
-Logstash will by default `/opt/logstash/etc/logstash.d/` do 
+Logstash will by default via `/opt/logstash/etc/logstash.d/` do 
 
 * read local syslog files,
 * listen to TCP:514 for syslog messages, 
@@ -42,14 +39,16 @@ Logstash will by default `/opt/logstash/etc/logstash.d/` do
 
 I have prebuilt some Packages which can be used as below.
 
-## RHEL 6.x  64bit
+## CentOS 6.x  64bit
+
+_current omnibus building fails on CentOS ...  will fix.
 
     wget https://s3-us-west-2.amazonaws.com/paulcz-packages/logstash-omnibus-1.1.10.el6.x86_64.rpm
     rpm -Uhv logstash-omnibus-1.1.10.el6.x86_64.rpm
 
 ## Ubuntu 12.04 64bit
 
-    wget https://s3-us-west-2.amazonaws.com/paulcz-packages/logstash-omnibus-1.1.10_amd64.deb
+    wget https://s3-us-west-2.amazonaws.com/paulcz-packages/logstash-src_1.1.13-1.ubuntu.12.04_amd64.deb
     dpkg -i logstash-omnibus-1.1.10_amd64.deb
 
 ## Start Processes
@@ -70,11 +69,7 @@ or if you don't have netcat installed
 
 open your web browser and browse to 
 
-Kibana        - http://localhost:5601
-
-or
-
-Kibana3       - http://localhost:8000/index.html
+Kibana3       - http://localhost
 
 
 # Building the logstash omnibus packages
@@ -96,7 +91,7 @@ _ubuntu 12.x + bugfix_
 
 You create a platform-specific package using the `build project` command:
 
-    bin/omnibus build project logstash
+    bin/omnibus build project logstash-src
 
 The platform/architecture type of the package created will match the platform
 where the `build project` command is invoked. So running this command on say a
@@ -110,8 +105,6 @@ builds and installs into /opt/logstash
 * redis
 * elasticsearch
 * jre
-* ruby
-* jruby
 * a bunch of dependencies
 
 

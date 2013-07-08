@@ -18,13 +18,15 @@
 name "kibana3"
 version "HEAD"
 dependency "rsync"
-dependency "nodejs"
+dependency "nginx"
+dependency "kibana"
 
-source :git => "https://github.com/elasticsearch/kibana3"
+source :git => "https://github.com/elasticsearch/kibana"
 
 relative_path "kibana3"
 
 
 build do
   command "#{install_dir}/embedded/bin/rsync -a . #{install_dir}/embedded/kibana3/"
+  command "sed -i 's/:9200//' #{install_dir}/embedded/kibana3/config.js"
 end

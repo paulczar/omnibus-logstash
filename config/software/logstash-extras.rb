@@ -18,12 +18,13 @@
 name "logstash-extras"
 
 dependency "rsync"
-dependency "logstash"
-dependency "kibana"
+dependency "logstash-src"
+#dependency "kibana"
 dependency "kibana3"
 dependency "elasticsearch"
 dependency "redis"
 dependency "rabbitmq"
+dependency "ruby"
 
 source :path => File.expand_path("files", Omnibus.project_root)
 

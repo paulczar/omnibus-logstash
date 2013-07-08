@@ -1,0 +1,18 @@
+#!/bin/sh
+
+# RUBYLIB=/opt/logstash/lib GEM_HOME=/opt/logstash/vendor/bundle/jruby/1.9/ /opt/logstash/embedded/jre/bin/java -jar /opt/logstash/vendor/jar/jruby-complete-1.7.4.jar /opt/logstash/lib/logstash/runner.rb agent -f /opt/logstash/etc/logstash.conf
+
+basedir=$(cd `dirname $0`/..; pwd)
+RUBY="jruby"
+RUBYVER="1.9"
+JRUBY=$basedir"/vendor/jar/"$(ls /opt/logstash/vendor/jar/ | tail -1)
+
+JAVA="$basedir/embedded/jre/bin/java"
+#JRUBY="$basedir/vendor/jar/jruby-complete-${JRUBYVER}.jar"
+
+export GEM_HOME="$basedir/vendor/bundle/${RUBY}/${RUBYVER}"
+export GEM_PATH=
+export JAVA_HOME="$basedir/embedded/jre"
+export RUBYLIB="$basedir/lib"
+
+exec $JAVA -jar "$JRUBY" "$basedir/lib/logstash/runner.rb" "$@"

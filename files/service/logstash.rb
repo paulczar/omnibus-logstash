@@ -11,12 +11,11 @@ scriptdir = "/opt/logstash/"
 
 # some variables to make things easier to remember
 
-JAVA         = "/opt/logstash/embedded/jre/bin/java"
 CONFIG_DIR   = "/opt/logstash/etc/logstash.d"
-PATTERNSPATH = "/opt/logstash/patterns"
-JARNAME      = "/opt/logstash/bin/logstash.jar"
-JAVAMEM      = 256
-ARGS="-jar #{JARNAME} agent --config #{CONFIG_DIR} --grok-patterns-path #{PATTERNSPATH}"
+ARGS         = "agent --config #{CONFIG_DIR}"
+
+# new command will look something like below.
+# GEM_HOME=/opt/logstash/vendor/bundle/jruby/1.9/ USE_JRUBY=1 PATH=$PATH:/opt/logstash/embedded/jre/bin bin/logstash agent  -e 'input{stdin{type=>"test"}} output {stdout{}}'
 
 
 # populate environment variables
@@ -24,7 +23,7 @@ pid_dir = "/opt/logstash/tmp"
 app_name = "logstash"
 log_output = true
 log_dir = "/opt/logstash/log"
-cmd = "#{JAVA} #{ARGS}"
+cmd = "/opt/logstash/bin/logstash-omnibus #{ARGS}"
 
 options = {
           :dir_mode => :normal,

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-for f in /opt/logstash/service/*.rb
+for f in /opt/logstash/service/*
 do 
   echo "Stopping $f ..."
   $f stop
